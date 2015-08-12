@@ -1,7 +1,6 @@
 package com.lazycat.android.popularmovies.app;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ public class FlavorMovieAdapter extends ArrayAdapter<FlavorMovie> {
     private static final String LOG_TAG = FlavorMovieAdapter.class.getSimpleName();
     private LayoutInflater mInflater;
 
-    public FlavorMovieAdapter(Context context, int resource, List objects) {
+    public FlavorMovieAdapter(Context context, int resource, List<FlavorMovie> objects) {
         super(context, resource, objects);
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

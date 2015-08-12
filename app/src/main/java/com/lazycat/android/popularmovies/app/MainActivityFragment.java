@@ -91,9 +91,7 @@ public class MainActivityFragment extends Fragment {
             String moviesJsonStr = DownloadUtils.discoverMoviesFromTheMovieDb(apiKey, sortBy);
 
             // parse the return JSON string to flavor movie object array
-            FlavorMovie[] flavorMovies = DownloadUtils.getMovieDataFromJson(moviesJsonStr);
-
-            return flavorMovies;
+            return DownloadUtils.getMovieDataFromJson(moviesJsonStr);
         }
 
         @Override
@@ -101,8 +99,8 @@ public class MainActivityFragment extends Fragment {
             super.onPostExecute(flavorMovies);
 
             mFlavorMovieAdapter.clear();
-            for (int i = 0; i< flavorMovies.length; i++) {
-                mFlavorMovieAdapter.add(flavorMovies[i]);
+            for (FlavorMovie flavorMovie : flavorMovies) {
+                mFlavorMovieAdapter.add(flavorMovie);
             }
         }
     }
