@@ -30,6 +30,7 @@ public class DetailActivityFragment extends Fragment {
         Intent intent = getActivity().getIntent();
 
         if (intent != null) {
+            // get flavorMovie data from intent
             FlavorMovie flavorMovie = intent.getParcelableExtra(MainActivityFragment.FLAVOR_MOVIE_PARCEL_KEY);
 
             if (flavorMovie != null) {

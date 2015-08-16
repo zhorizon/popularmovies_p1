@@ -116,7 +116,6 @@ public class DownloadUtils {
     }
 
     public static String fetchMovieJson(URL url) {
-        //TODO check static method is thread safe or not!!!
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String movieJsonStr = null;
