@@ -39,6 +39,8 @@ public class DetailActivityFragment extends Fragment {
                 // Build URL string
                 String urlStr = DownloadUtils.buildPosterImageUrl(flavorMovie.getPosterPath());
 
+                // TODO should we also check the network status here??
+
                 // Using Picasso to fetch images and load them into view
                 Picasso.with(getActivity()).load(urlStr).into(imageView);
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -97,11 +98,16 @@ public class MainActivityFragment extends Fragment {
                 getString(R.string.pref_order_by_key),
                 getString(R.string.pref_order_by_default));
 
+        // if back from settings activity, the preference value may be changed
         if (mSortBy == null || mSortBy.compareTo(sortBy) != 0) {
             mSortBy = sortBy;
+        }
 
-            // if back from settings activity, the preference value may be changed
+        // check the network status before call theMovieDB api!!
+        if (NetworkUtils.isNetworkAvailable(getActivity())) {
             new FetchMovieTask().execute(mSortBy);
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.msg_network_not_available), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -157,8 +163,12 @@ public class MainActivityFragment extends Fragment {
             // the adapter directly
             mFlavorMovieList.clear();
 
-            for (FlavorMovie flavorMovie : flavorMovies) {
-                mFlavorMovieList.add(flavorMovie);
+            if (flavorMovies != null) {
+                for (FlavorMovie flavorMovie : flavorMovies) {
+                    mFlavorMovieList.add(flavorMovie);
+                }
+            } else {
+                Log.d(LOG_TAG, "flavorMovies is null!");
             }
 
             // must notify the adapter data changed!!
