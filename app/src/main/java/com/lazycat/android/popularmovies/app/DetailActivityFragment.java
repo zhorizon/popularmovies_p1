@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -39,10 +40,13 @@ public class DetailActivityFragment extends Fragment {
                 // Build URL string
                 String urlStr = DownloadUtils.buildPosterImageUrl(flavorMovie.getPosterPath());
 
-                // TODO should we also check the network status here??
-
-                // Using Picasso to fetch images and load them into view
-                Picasso.with(getActivity()).load(urlStr).into(imageView);
+                // check the network status here before access internet
+                if (NetworkUtils.isNetworkAvailable(getActivity())) {
+                    // Using Picasso to fetch poster image and load them into view
+                    Picasso.with(getActivity()).load(urlStr).into(imageView);
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.msg_network_not_available), Toast.LENGTH_SHORT).show();
+                }
 
                 // Fill others movie data
                 ((TextView) rootView.findViewById(R.id.textView_title)).setText(flavorMovie.getOriginalTitle());
