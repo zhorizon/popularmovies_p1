@@ -42,8 +42,12 @@ public class DetailActivityFragment extends Fragment {
 
                 // check the network status here before access internet
                 if (NetworkUtils.isNetworkAvailable(getActivity())) {
-                    // Using Picasso to fetch poster image and load them into view
-                    Picasso.with(getActivity()).load(urlStr).into(imageView);
+                    if (urlStr != null) {
+                        // Using Picasso to fetch poster image and load them into view
+                        Picasso.with(getActivity()).load(urlStr).into(imageView);
+                    } else {
+                        Log.d(LOG_TAG, "urlStr is null!");
+                    }
                 } else {
                     Toast.makeText(getActivity(), getString(R.string.msg_network_not_available), Toast.LENGTH_SHORT).show();
                 }

@@ -45,10 +45,14 @@ public class FlavorMovieAdapter extends ArrayAdapter<FlavorMovie> {
         if (flavorMovie != null) {
             String urlStr = DownloadUtils.buildPosterImageUrl(flavorMovie.getPosterPath());
 
-            Log.v(LOG_TAG, "Poster Path: " + flavorMovie.getPosterPath() + " Poster image url: " + urlStr);
+            if (urlStr != null) {
+                Log.v(LOG_TAG, "Poster Path: " + flavorMovie.getPosterPath() + " Poster image url: " + urlStr);
 
-            // Using Picasso to fetch images and load them into view
-            Picasso.with(getContext()).load(urlStr).into(imageView);
+                // Using Picasso to fetch images and load them into view
+                Picasso.with(getContext()).load(urlStr).into(imageView);
+            } else {
+                Log.d(LOG_TAG, "urlStr is null!");
+            }
         } else {
             Log.d(LOG_TAG, "flavorMovie is null!?");
         }
